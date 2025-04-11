@@ -9,7 +9,7 @@ const Index = () => {
   useEffect(() => {
     // Check if user is authenticated
     if (authService.isAuthenticated()) {
-      navigate("/");
+      navigate("/dashboard");
     } else {
       navigate("/login");
     }

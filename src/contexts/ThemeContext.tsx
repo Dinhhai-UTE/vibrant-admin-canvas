@@ -43,9 +43,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = window.document.documentElement;
     
     root.classList.remove("theme-blue", "theme-red", "theme-green", "theme-yellow", "theme-pink", "theme-purple");
+    root.classList.remove("gradient-bg-blue", "gradient-bg-red", "gradient-bg-green", "gradient-bg-yellow", "gradient-bg-pink", "gradient-bg-purple");
+    
     if (colorTheme !== "blue") {
       root.classList.add(`theme-${colorTheme}`);
     }
+    
+    // Add gradient background class
+    root.classList.add(`gradient-bg-${colorTheme}`);
+    
     localStorage.setItem("colorTheme", colorTheme);
   }, [colorTheme]);
 

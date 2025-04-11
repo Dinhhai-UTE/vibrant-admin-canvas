@@ -4,7 +4,8 @@ import { useLocation, NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { 
   ChevronLeft, ChevronRight, Home, Package, ShoppingCart, Users, BarChart4,
-  Settings, HelpCircle, LayoutDashboard, PanelLeft, Palette
+  Settings, HelpCircle, LayoutDashboard, PanelLeft, Palette, Tag, Mail, Phone,
+  MapPin, Image, List, Box, Ticket, Contact
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -68,21 +69,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse }) => {
     <aside
       className={cn(
         "fixed top-0 left-0 z-20 h-full bg-sidebar border-r shadow-sm transition-all duration-300 md:relative flex flex-col",
+        `sidebar-gradient-${colorTheme}`,
         isCollapsed ? "w-16" : "w-64"
       )}
     >
-      <div className="flex items-center h-16 px-3 justify-between border-b">
+      <div className="flex items-center h-16 px-3 justify-between border-b border-white/10">
         {!isCollapsed && (
           <div className="flex items-center gap-2">
             <img src="/placeholder.svg" alt="Logo" className="h-8 w-8" />
-            <h1 className="text-lg font-semibold">AdminDash</h1>
+            <h1 className="text-lg font-semibold text-white">AdminDash</h1>
           </div>
         )}
         <Button
           variant="ghost"
           size="icon"
           onClick={onToggleCollapse}
-          className="ml-auto text-muted-foreground hover:text-foreground"
+          className="ml-auto text-white hover:text-white/80 hover:bg-white/10"
         >
           {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
           <span className="sr-only">Toggle sidebar</span>
@@ -104,9 +106,33 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse }) => {
             isCollapsed={isCollapsed}
           />
           <SidebarNavItem
+            title="Product Variants"
+            icon={Box}
+            path="/product-variants"
+            isCollapsed={isCollapsed}
+          />
+          <SidebarNavItem
+            title="Categories"
+            icon={List}
+            path="/categories"
+            isCollapsed={isCollapsed}
+          />
+          <SidebarNavItem
+            title="Brands"
+            icon={Tag}
+            path="/brands"
+            isCollapsed={isCollapsed}
+          />
+          <SidebarNavItem
             title="Orders"
             icon={ShoppingCart}
             path="/orders"
+            isCollapsed={isCollapsed}
+          />
+          <SidebarNavItem
+            title="Vouchers"
+            icon={Ticket}
+            path="/vouchers"
             isCollapsed={isCollapsed}
           />
           <SidebarNavItem
@@ -115,8 +141,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse }) => {
             path="/users"
             isCollapsed={isCollapsed}
           />
+          <SidebarNavItem
+            title="Address Book"
+            icon={Contact}
+            path="/address-book"
+            isCollapsed={isCollapsed}
+          />
+          <SidebarNavItem
+            title="Banners"
+            icon={Image}
+            path="/banners"
+            isCollapsed={isCollapsed}
+          />
           
-          <Separator className="my-4" />
+          <Separator className="my-4 bg-white/20" />
           
           <SidebarNavItem
             title="Analytics"
@@ -132,7 +170,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse }) => {
                 size={isCollapsed ? "icon" : "default"}
                 className={cn(
                   "w-full flex items-center justify-start gap-2 text-sm py-2 px-3 font-normal rounded-md",
-                  "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  "text-white/80 hover:bg-white/10 hover:text-white"
                 )}
               >
                 <Palette className="h-5 w-5" />
@@ -172,14 +210,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse }) => {
       </ScrollArea>
       
       <div className={cn(
-        "flex flex-col p-3 gap-1 mt-auto border-t",
+        "flex flex-col p-3 gap-1 mt-auto border-t border-white/10",
         isCollapsed ? "items-center" : "items-start"
       )}>
         <Button
           variant="outline"
           size="sm"
           className={cn(
-            "w-full flex items-center gap-2",
+            "w-full flex items-center gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white",
             isCollapsed && "justify-center px-2"
           )}
         >

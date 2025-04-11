@@ -12,6 +12,8 @@ import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import Users from "./pages/Users";
 
+// New page imports would go here when created
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -32,9 +34,17 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/product-variants" element={<NotFound />} />
+            <Route path="/categories" element={<NotFound />} />
+            <Route path="/brands" element={<NotFound />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/vouchers" element={<NotFound />} />
             <Route path="/users" element={<Users />} />
-            {/* Add more routes here */}
+            <Route path="/address-book" element={<NotFound />} />
+            <Route path="/banners" element={<NotFound />} />
+            <Route path="/analytics" element={<NotFound />} />
+            <Route path="/settings" element={<NotFound />} />
+            <Route path="/help" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

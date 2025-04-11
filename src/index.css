@@ -148,6 +148,7 @@
 }
 
 @layer components {
+  /* Color theme gradients */
   .gradient-blue {
     @apply bg-gradient-to-r from-blue-600 to-blue-400;
   }
@@ -170,5 +171,55 @@
   
   .gradient-purple {
     @apply bg-gradient-to-r from-purple-600 to-purple-400;
+  }
+  
+  /* Background gradients for the entire app */
+  .gradient-bg-blue {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800;
+  }
+  
+  .gradient-bg-red {
+    @apply bg-gradient-to-br from-red-50 to-rose-100 dark:from-slate-900 dark:to-red-900/30;
+  }
+  
+  .gradient-bg-green {
+    @apply bg-gradient-to-br from-green-50 to-emerald-100 dark:from-slate-900 dark:to-green-900/30;
+  }
+  
+  .gradient-bg-yellow {
+    @apply bg-gradient-to-br from-yellow-50 to-amber-100 dark:from-slate-900 dark:to-yellow-900/30;
+  }
+  
+  .gradient-bg-pink {
+    @apply bg-gradient-to-br from-pink-50 to-rose-100 dark:from-slate-900 dark:to-pink-900/30;
+  }
+  
+  .gradient-bg-purple {
+    @apply bg-gradient-to-br from-purple-50 to-violet-100 dark:from-slate-900 dark:to-purple-900/30;
+  }
+  
+  /* Sidebar color theme gradients */
+  .sidebar-gradient-blue {
+    @apply bg-gradient-to-b from-blue-600 to-blue-800;
+  }
+  
+  .sidebar-gradient-red {
+    @apply bg-gradient-to-b from-red-600 to-red-800;
+  }
+  
+  .sidebar-gradient-green {
+    @apply bg-gradient-to-b from-green-600 to-green-800;
+  }
+  
+  .sidebar-gradient-yellow {
+    @apply bg-gradient-to-b from-yellow-500 to-yellow-700;
+  }
+  
+  .sidebar-gradient-pink {
+    @apply bg-gradient-to-b from-pink-600 to-pink-800;
+  }
+  
+  .sidebar-gradient-purple {
+    @apply bg-gradient-to-b from-purple-600 to-purple-800;
   }
 }
