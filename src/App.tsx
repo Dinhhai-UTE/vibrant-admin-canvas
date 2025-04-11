@@ -11,8 +11,12 @@ import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import Users from "./pages/Users";
-
-// New page imports would go here when created
+import Vouchers from "./pages/Vouchers";
+import AddressBook from "./pages/AddressBook";
+import Banners from "./pages/Banners";
+import Categories from "./pages/Categories";
+import Brands from "./pages/Brands";
+import ProductVariants from "./pages/ProductVariants";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,14 +38,14 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/product-variants" element={<NotFound />} />
-            <Route path="/categories" element={<NotFound />} />
-            <Route path="/brands" element={<NotFound />} />
+            <Route path="/product-variants" element={<ProductVariants />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/brands" element={<Brands />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/vouchers" element={<NotFound />} />
+            <Route path="/vouchers" element={<Vouchers />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/address-book" element={<NotFound />} />
-            <Route path="/banners" element={<NotFound />} />
+            <Route path="/address-book" element={<AddressBook />} />
+            <Route path="/banners" element={<Banners />} />
             <Route path="/analytics" element={<NotFound />} />
             <Route path="/settings" element={<NotFound />} />
             <Route path="/help" element={<NotFound />} />
