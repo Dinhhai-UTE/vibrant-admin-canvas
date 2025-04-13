@@ -38,6 +38,7 @@ const Vouchers = () => {
       id: "type",
       header: "Type",
       accessorKey: "type",
+      cell: (props: any) => <span>{props.getValue()}</span>,
     },
     {
       id: "status",
@@ -53,6 +54,7 @@ const Vouchers = () => {
       id: "validUntil",
       header: "Valid Until",
       accessorKey: "validUntil",
+      cell: (props: any) => <span>{props.getValue()}</span>,
     },
     {
       id: "usage",

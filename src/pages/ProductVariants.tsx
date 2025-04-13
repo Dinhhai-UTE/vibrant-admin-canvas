@@ -1,75 +1,61 @@
 
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BaseLayout from "@/components/layout/BaseLayout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/DataTable/DataTable";
-import { Package, Plus, Search, Box, ShoppingBag, CircleDollarSign } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Box, Plus, Search, Tag, ShoppingBag, DollarSign, BarChart } from "lucide-react";
 
 const ProductVariants = () => {
   // Sample data for demonstration
   const variants = [
-    {
-      id: 1,
-      product: "iPhone 14",
-      sku: "IPH14-128-BLK",
-      variant: "128GB / Black",
-      price: 799,
+    { 
+      id: 1, 
+      product: "Classic T-Shirt", 
+      sku: "TST-BLK-M", 
+      variant: "Black / Medium",
+      price: 24.99,
       stock: 45,
-      status: "In Stock",
+      status: "In Stock"
     },
-    {
-      id: 2,
-      product: "iPhone 14",
-      sku: "IPH14-128-WHT",
-      variant: "128GB / White",
-      price: 799,
+    { 
+      id: 2, 
+      product: "Classic T-Shirt", 
+      sku: "TST-BLK-L", 
+      variant: "Black / Large",
+      price: 24.99,
       stock: 32,
-      status: "In Stock",
+      status: "In Stock"
     },
-    {
-      id: 3,
-      product: "iPhone 14",
-      sku: "IPH14-256-BLK",
-      variant: "256GB / Black",
-      price: 899,
-      stock: 18,
-      status: "In Stock",
-    },
-    {
-      id: 4,
-      product: "MacBook Pro",
-      sku: "MBP-13-8-256-SPC",
-      variant: "13\" / 8GB / 256GB / Space Gray",
-      price: 1299,
-      stock: 12,
-      status: "Low Stock",
-    },
-    {
-      id: 5,
-      product: "MacBook Pro",
-      sku: "MBP-13-16-512-SPC",
-      variant: "13\" / 16GB / 512GB / Space Gray",
-      price: 1699,
+    { 
+      id: 3, 
+      product: "Classic T-Shirt", 
+      sku: "TST-WHT-M", 
+      variant: "White / Medium",
+      price: 24.99,
       stock: 0,
-      status: "Out of Stock",
+      status: "Out of Stock"
     },
-    {
-      id: 6,
-      product: "AirPods Pro",
-      sku: "APP-2-WHT",
-      variant: "2nd Gen / White",
-      price: 249,
-      stock: 56,
-      status: "In Stock",
+    { 
+      id: 4, 
+      product: "Denim Jeans", 
+      sku: "DNM-BLU-30", 
+      variant: "Blue / 30",
+      price: 59.99,
+      stock: 12,
+      status: "Low Stock"
+    },
+    { 
+      id: 5, 
+      product: "Denim Jeans", 
+      sku: "DNM-BLK-32", 
+      variant: "Black / 32",
+      price: 59.99,
+      stock: 28,
+      status: "In Stock"
     },
   ];
 
@@ -79,27 +65,29 @@ const ProductVariants = () => {
       id: "product",
       header: "Product",
       accessorKey: "product",
-      cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
+      cell: (props: any) => (
+        <div className="flex flex-col">
+          <span className="font-medium">{props.getValue()}</span>
+          <span className="text-xs text-muted-foreground">{props.row.original.variant}</span>
+        </div>
+      ),
     },
     {
       id: "sku",
       header: "SKU",
       accessorKey: "sku",
-      cell: (props: any) => <span className="font-mono text-xs">{props.getValue()}</span>,
-    },
-    {
-      id: "variant",
-      header: "Variant",
-      accessorKey: "variant",
+      cell: (props: any) => (
+        <span className="font-mono text-sm">{props.getValue()}</span>
+      ),
     },
     {
       id: "price",
       header: "Price",
       accessorKey: "price",
       cell: (props: any) => (
-        <div className="font-medium flex items-center">
-          <CircleDollarSign className="h-3 w-3 mr-1 text-muted-foreground" />
-          ${props.getValue()}.00
+        <div className="flex items-center gap-1">
+          <DollarSign className="h-4 w-4 text-muted-foreground" />
+          <span className="font-medium">{props.getValue().toFixed(2)}</span>
         </div>
       ),
     },
@@ -108,7 +96,10 @@ const ProductVariants = () => {
       header: "Stock",
       accessorKey: "stock",
       cell: (props: any) => (
-        <span className="font-medium">{props.getValue()}</span>
+        <div className="flex items-center gap-1">
+          <ShoppingBag className="h-4 w-4 text-muted-foreground" />
+          <span>{props.getValue()}</span>
+        </div>
       ),
     },
     {
@@ -117,22 +108,18 @@ const ProductVariants = () => {
       accessorKey: "status",
       cell: (props: any) => {
         const status = props.getValue();
-        let variant: "default" | "success" | "secondary" | "destructive" | "outline" = "default";
+        let variant: "success" | "destructive" | "secondary" | "default" = "default";
         
-        switch (status) {
-          case "In Stock":
-            variant = "success";
-            break;
-          case "Low Stock":
-            variant = "secondary";
-            break;
-          case "Out of Stock":
-            variant = "destructive";
-            break;
-        }
+        if (status === "In Stock") variant = "success";
+        else if (status === "Out of Stock") variant = "destructive";
+        else if (status === "Low Stock") variant = "secondary";
         
-        return <Badge variant={variant}>{status}</Badge>;
-      },
+        return (
+          <Badge variant={variant}>
+            {status}
+          </Badge>
+        );
+      }
     },
     {
       id: "actions",
@@ -187,7 +174,7 @@ const ProductVariants = () => {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Product Variants</h1>
           <p className="text-muted-foreground">
-            Manage product variants, options, and stock levels
+            Manage product variations, SKUs, and inventory
           </p>
         </div>
         <Button className="flex items-center gap-2">
@@ -206,7 +193,7 @@ const ProductVariants = () => {
                   Variant Management
                 </CardTitle>
                 <CardDescription>
-                  View and manage product variants, colors, sizes, and other attributes
+                  Create and manage product variations, SKUs, and inventory
                 </CardDescription>
               </div>
               <div className="flex items-center gap-2 relative">
@@ -221,6 +208,15 @@ const ProductVariants = () => {
             </div>
           </CardHeader>
           <CardContent>
+            <Tabs defaultValue="all" className="mb-6">
+              <TabsList>
+                <TabsTrigger value="all">All Variants</TabsTrigger>
+                <TabsTrigger value="in-stock">In Stock</TabsTrigger>
+                <TabsTrigger value="low-stock">Low Stock</TabsTrigger>
+                <TabsTrigger value="out-of-stock">Out of Stock</TabsTrigger>
+              </TabsList>
+            </Tabs>
+
             <DataTable columns={columns} data={variants} />
           </CardContent>
         </Card>

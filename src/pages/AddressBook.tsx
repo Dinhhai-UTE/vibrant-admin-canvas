@@ -1,76 +1,76 @@
 
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BaseLayout from "@/components/layout/BaseLayout";
-import { DataTable } from "@/components/DataTable/DataTable";
-import { Contact, Plus, Search, MapPin, Phone, Mail } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DataTable } from "@/components/DataTable/DataTable";
+import { Badge } from "@/components/ui/badge";
+import { Contact, Plus, Search, Users, Mail, Phone, MapPin } from "lucide-react";
 
 const AddressBook = () => {
   // Sample data for demonstration
   const addresses = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      phone: "+1 (555) 123-4567",
-      city: "New York",
+    { 
+      id: 1, 
+      name: "John Doe", 
+      email: "john.doe@example.com", 
+      phone: "+1 (555) 123-4567", 
+      city: "New York", 
       district: "Manhattan",
       ward: "Midtown",
       address: "123 Broadway St, Apt 45",
+      isDefault: true,
       type: "Home"
     },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      phone: "+1 (555) 987-6543",
-      city: "Los Angeles",
+    { 
+      id: 2, 
+      name: "Jane Smith", 
+      email: "jane.smith@example.com", 
+      phone: "+1 (555) 987-6543", 
+      city: "Los Angeles", 
       district: "Hollywood",
       ward: "West Hollywood",
-      address: "456 Sunset Blvd",
+      address: "456 Sunset Blvd, Unit 7",
+      isDefault: false,
       type: "Work"
     },
-    {
-      id: 3,
-      name: "Robert Johnson",
-      email: "robert.j@example.com",
-      phone: "+1 (555) 555-5555",
-      city: "Chicago",
-      district: "Downtown",
-      ward: "Loop",
-      address: "789 Michigan Ave, Suite 1000",
-      type: "Office"
-    },
-    {
-      id: 4,
-      name: "Emily Wilson",
-      email: "emily.w@example.com",
-      phone: "+1 (555) 111-2222",
-      city: "San Francisco",
-      district: "Mission",
-      ward: "Mission District",
-      address: "101 Valencia St",
+    { 
+      id: 3, 
+      name: "Robert Johnson", 
+      email: "robert.j@example.com", 
+      phone: "+1 (555) 456-7890", 
+      city: "Chicago", 
+      district: "Loop",
+      ward: "Downtown",
+      address: "789 Michigan Ave, Suite 12",
+      isDefault: false,
       type: "Home"
     },
-    {
-      id: 5,
-      name: "Michael Brown",
-      email: "michael.b@example.com",
-      phone: "+1 (555) 444-3333",
-      city: "Boston",
-      district: "Back Bay",
-      ward: "Beacon Hill",
-      address: "222 Newbury St",
+    { 
+      id: 4, 
+      name: "Sarah Williams", 
+      email: "sarah.w@example.com", 
+      phone: "+1 (555) 789-0123", 
+      city: "San Francisco", 
+      district: "Mission",
+      ward: "Mission District",
+      address: "101 Valencia St, Apt 3B",
+      isDefault: false,
       type: "Shipping"
+    },
+    { 
+      id: 5, 
+      name: "Michael Brown", 
+      email: "michael.b@example.com", 
+      phone: "+1 (555) 321-6547", 
+      city: "Boston", 
+      district: "Back Bay",
+      ward: "Copley Square",
+      address: "222 Newbury St, Floor 3",
+      isDefault: false,
+      type: "Billing"
     },
   ];
 
@@ -83,44 +83,55 @@ const AddressBook = () => {
       cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
     },
     {
-      id: "contact",
-      header: "Contact",
-      cell: ({ row }: any) => (
-        <div className="space-y-1">
-          <div className="flex items-center text-sm text-muted-foreground">
-            <Mail className="mr-1 h-3 w-3" />
-            {row.original.email}
-          </div>
-          <div className="flex items-center text-sm">
-            <Phone className="mr-1 h-3 w-3" />
-            {row.original.phone}
-          </div>
+      id: "email",
+      header: "Email",
+      accessorKey: "email",
+      cell: (props: any) => (
+        <div className="flex items-center gap-2">
+          <Mail className="h-4 w-4 text-muted-foreground" />
+          <span>{props.getValue()}</span>
+        </div>
+      ),
+    },
+    {
+      id: "phone",
+      header: "Phone",
+      accessorKey: "phone",
+      cell: (props: any) => (
+        <div className="flex items-center gap-2">
+          <Phone className="h-4 w-4 text-muted-foreground" />
+          <span>{props.getValue()}</span>
         </div>
       ),
     },
     {
       id: "location",
       header: "Location",
-      cell: ({ row }: any) => (
-        <div className="space-y-1">
-          <div className="text-sm">
-            {row.original.city}, {row.original.district}
-          </div>
-          <div className="text-sm text-muted-foreground">
-            {row.original.ward}
-          </div>
+      accessorKey: "city",
+      cell: (props: any) => (
+        <div className="flex items-center gap-2">
+          <MapPin className="h-4 w-4 text-muted-foreground" />
+          <span>
+            {props.getValue()}, {props.row.original.district}
+          </span>
         </div>
       ),
-    },
-    {
-      id: "address",
-      header: "Address",
-      accessorKey: "address",
     },
     {
       id: "type",
       header: "Type",
       accessorKey: "type",
+      cell: (props: any) => <span>{props.getValue()}</span>,
+    },
+    {
+      id: "isDefault",
+      header: "Status",
+      accessorKey: "isDefault",
+      cell: ({ row }: any) => (
+        <Badge variant={row.original.isDefault ? "success" : "secondary"}>
+          {row.original.isDefault ? "Default" : "Regular"}
+        </Badge>
+      ),
     },
     {
       id: "actions",
@@ -175,7 +186,7 @@ const AddressBook = () => {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Address Book</h1>
           <p className="text-muted-foreground">
-            Manage customer and shipping addresses
+            Manage customer and business contact information
           </p>
         </div>
         <Button className="flex items-center gap-2">
@@ -191,10 +202,10 @@ const AddressBook = () => {
               <div>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Contact className="h-5 w-5" />
-                  Address Directory
+                  Contact Management
                 </CardTitle>
                 <CardDescription>
-                  View and manage addresses for customers and shipping
+                  View and manage your saved addresses and contact information
                 </CardDescription>
               </div>
               <div className="flex items-center gap-2 relative">
@@ -212,10 +223,10 @@ const AddressBook = () => {
             <Tabs defaultValue="all" className="mb-6">
               <TabsList>
                 <TabsTrigger value="all">All Addresses</TabsTrigger>
-                <TabsTrigger value="shipping">Shipping</TabsTrigger>
-                <TabsTrigger value="billing">Billing</TabsTrigger>
                 <TabsTrigger value="home">Home</TabsTrigger>
                 <TabsTrigger value="work">Work</TabsTrigger>
+                <TabsTrigger value="shipping">Shipping</TabsTrigger>
+                <TabsTrigger value="billing">Billing</TabsTrigger>
               </TabsList>
             </Tabs>
 

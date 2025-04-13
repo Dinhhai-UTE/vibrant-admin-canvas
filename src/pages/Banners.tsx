@@ -1,72 +1,71 @@
 
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BaseLayout from "@/components/layout/BaseLayout";
-import { DataTable } from "@/components/DataTable/DataTable";
-import { Image, Plus, Search, ExternalLink, Calendar } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DataTable } from "@/components/DataTable/DataTable";
+import { Badge } from "@/components/ui/badge";
+import { Image, Plus, Search, Monitor, Link, Calendar } from "lucide-react";
 
 const Banners = () => {
   // Sample data for demonstration
   const banners = [
-    {
-      id: 1,
-      title: "Summer Sale",
-      image: "/placeholder.svg",
-      location: "Homepage Hero",
-      status: "Active",
-      startDate: "2025-04-01",
-      endDate: "2025-05-31",
+    { 
+      id: 1, 
+      title: "Summer Sale", 
+      image: "/placeholder.svg", 
       url: "/summer-sale",
-    },
-    {
-      id: 2,
-      title: "New Collection",
-      image: "/placeholder.svg",
-      location: "Category Page",
+      position: "Homepage Hero",
+      startDate: "2025-06-01",
+      endDate: "2025-06-30",
       status: "Active",
-      startDate: "2025-04-10",
-      endDate: "2025-06-10",
-      url: "/new-arrivals",
+      clicks: 1245
     },
-    {
-      id: 3,
-      title: "Flash Deals",
-      image: "/placeholder.svg",
-      location: "Homepage Slider",
+    { 
+      id: 2, 
+      title: "Back to School", 
+      image: "/placeholder.svg", 
+      url: "/back-to-school",
+      position: "Category Page",
+      startDate: "2025-08-15",
+      endDate: "2025-09-15",
       status: "Scheduled",
-      startDate: "2025-05-15",
-      endDate: "2025-05-18",
-      url: "/flash-deals",
+      clicks: 0
     },
-    {
-      id: 4,
-      title: "Holiday Special",
-      image: "/placeholder.svg",
-      location: "Product Page",
-      status: "Draft",
-      startDate: "2025-11-25",
-      endDate: "2025-12-31",
+    { 
+      id: 3, 
+      title: "Holiday Special", 
+      image: "/placeholder.svg", 
       url: "/holiday-special",
+      position: "Homepage Slider",
+      startDate: "2025-12-01",
+      endDate: "2025-12-31",
+      status: "Scheduled",
+      clicks: 0
     },
-    {
-      id: 5,
-      title: "Brand Spotlight",
-      image: "/placeholder.svg",
-      location: "Category Page",
-      status: "Inactive",
+    { 
+      id: 4, 
+      title: "New Arrivals", 
+      image: "/placeholder.svg", 
+      url: "/new-arrivals",
+      position: "Homepage Banner",
+      startDate: "2025-05-01",
+      endDate: "2025-05-30",
+      status: "Active",
+      clicks: 876
+    },
+    { 
+      id: 5, 
+      title: "Spring Collection", 
+      image: "/placeholder.svg", 
+      url: "/spring-collection",
+      position: "Product Page",
       startDate: "2025-03-01",
       endDate: "2025-03-31",
-      url: "/brand-spotlight",
+      status: "Ended",
+      clicks: 2453
     },
   ];
 
@@ -74,27 +73,52 @@ const Banners = () => {
   const columns = [
     {
       id: "image",
-      header: "Image",
+      header: "Banner",
       cell: ({ row }: any) => (
-        <div className="relative w-16 h-10 rounded overflow-hidden">
-          <img
-            src={row.original.image}
-            alt={row.original.title}
-            className="object-cover w-full h-full"
-          />
+        <div className="flex items-center gap-3">
+          <div className="h-12 w-12 overflow-hidden rounded-md">
+            <img 
+              src={row.original.image} 
+              alt={row.original.title} 
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div>
+            <p className="font-medium">{row.original.title}</p>
+            <p className="text-xs text-muted-foreground">{row.original.position}</p>
+          </div>
         </div>
       ),
     },
     {
-      id: "title",
-      header: "Title",
-      accessorKey: "title",
-      cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
+      id: "link",
+      header: "Link",
+      accessorKey: "url",
+      cell: (props: any) => (
+        <div className="flex items-center gap-2">
+          <Link className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-mono">{props.getValue()}</span>
+        </div>
+      ),
     },
     {
-      id: "location",
-      header: "Location",
-      accessorKey: "location",
+      id: "dateRange",
+      header: "Date Range",
+      accessorKey: "startDate",
+      cell: (props: any) => (
+        <div className="flex items-center gap-2">
+          <Calendar className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm">
+            {props.getValue()} to {props.row.original.endDate}
+          </span>
+        </div>
+      ),
+    },
+    {
+      id: "clicks",
+      header: "Clicks",
+      accessorKey: "clicks",
+      cell: (props: any) => <span className="font-medium">{props.getValue().toLocaleString()}</span>,
     },
     {
       id: "status",
@@ -102,54 +126,17 @@ const Banners = () => {
       accessorKey: "status",
       cell: (props: any) => {
         const status = props.getValue();
-        let variant: "default" | "success" | "secondary" | "destructive" | "outline" = "default";
+        let variant: "success" | "secondary" | "default" = "default";
         
-        switch (status) {
-          case "Active":
-            variant = "success";
-            break;
-          case "Scheduled":
-            variant = "secondary";
-            break;
-          case "Draft":
-            variant = "outline";
-            break;
-          case "Inactive":
-            variant = "destructive";
-            break;
-        }
+        if (status === "Active") variant = "success";
+        else if (status === "Scheduled") variant = "secondary";
         
-        return <Badge variant={variant}>{status}</Badge>;
-      },
-    },
-    {
-      id: "duration",
-      header: "Duration",
-      cell: ({ row }: any) => (
-        <div className="flex flex-col">
-          <span className="text-xs text-muted-foreground flex items-center">
-            <Calendar className="h-3 w-3 mr-1" />
-            {row.original.startDate}
-          </span>
-          <span className="text-xs text-muted-foreground flex items-center">
-            <Calendar className="h-3 w-3 mr-1" />
-            {row.original.endDate}
-          </span>
-        </div>
-      ),
-    },
-    {
-      id: "url",
-      header: "URL",
-      accessorKey: "url",
-      cell: (props: any) => (
-        <div className="flex items-center">
-          <span className="truncate max-w-[100px]">{props.getValue()}</span>
-          <Button variant="ghost" size="icon" className="h-6 w-6 ml-1">
-            <ExternalLink className="h-3 w-3" />
-          </Button>
-        </div>
-      ),
+        return (
+          <Badge variant={variant}>
+            {status}
+          </Badge>
+        );
+      }
     },
     {
       id: "actions",
@@ -204,7 +191,7 @@ const Banners = () => {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Banners</h1>
           <p className="text-muted-foreground">
-            Manage promotional banners and marketing imagery
+            Manage promotional banners and advertisements
           </p>
         </div>
         <Button className="flex items-center gap-2">
@@ -223,7 +210,7 @@ const Banners = () => {
                   Banner Management
                 </CardTitle>
                 <CardDescription>
-                  Create and manage promotional banners for your website
+                  Create and manage promotional banners for your store
                 </CardDescription>
               </div>
               <div className="flex items-center gap-2 relative">
@@ -243,8 +230,7 @@ const Banners = () => {
                 <TabsTrigger value="all">All Banners</TabsTrigger>
                 <TabsTrigger value="active">Active</TabsTrigger>
                 <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
-                <TabsTrigger value="draft">Draft</TabsTrigger>
-                <TabsTrigger value="inactive">Inactive</TabsTrigger>
+                <TabsTrigger value="ended">Ended</TabsTrigger>
               </TabsList>
             </Tabs>
 
