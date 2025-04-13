@@ -23,20 +23,24 @@ const Vouchers = () => {
   // Define table columns
   const columns = [
     {
+      id: "code",
       header: "Code",
       accessorKey: "code",
       cell: (props: any) => <span className="font-mono font-medium">{props.getValue()}</span>,
     },
     {
+      id: "discount",
       header: "Discount",
       accessorKey: "discount",
       cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
     },
     {
+      id: "type",
       header: "Type",
       accessorKey: "type",
     },
     {
+      id: "status",
       header: "Status",
       accessorKey: "status",
       cell: (props: any) => (
@@ -46,10 +50,12 @@ const Vouchers = () => {
       ),
     },
     {
+      id: "validUntil",
       header: "Valid Until",
       accessorKey: "validUntil",
     },
     {
+      id: "usage",
       header: "Usage",
       accessorKey: "usageCount",
       cell: (props: any) => (
@@ -59,6 +65,7 @@ const Vouchers = () => {
       ),
     },
     {
+      id: "actions",
       header: "Actions",
       cell: () => (
         <div className="flex gap-2">

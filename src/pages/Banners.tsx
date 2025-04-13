@@ -73,6 +73,7 @@ const Banners = () => {
   // Define table columns
   const columns = [
     {
+      id: "image",
       header: "Image",
       cell: ({ row }: any) => (
         <div className="relative w-16 h-10 rounded overflow-hidden">
@@ -85,15 +86,18 @@ const Banners = () => {
       ),
     },
     {
+      id: "title",
       header: "Title",
       accessorKey: "title",
       cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
     },
     {
+      id: "location",
       header: "Location",
       accessorKey: "location",
     },
     {
+      id: "status",
       header: "Status",
       accessorKey: "status",
       cell: (props: any) => {
@@ -119,6 +123,7 @@ const Banners = () => {
       },
     },
     {
+      id: "duration",
       header: "Duration",
       cell: ({ row }: any) => (
         <div className="flex flex-col">
@@ -134,6 +139,7 @@ const Banners = () => {
       ),
     },
     {
+      id: "url",
       header: "URL",
       accessorKey: "url",
       cell: (props: any) => (
@@ -146,6 +152,7 @@ const Banners = () => {
       ),
     },
     {
+      id: "actions",
       header: "Actions",
       cell: () => (
         <div className="flex gap-2">

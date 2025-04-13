@@ -77,11 +77,13 @@ const AddressBook = () => {
   // Define table columns
   const columns = [
     {
+      id: "name",
       header: "Name",
       accessorKey: "name",
       cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
     },
     {
+      id: "contact",
       header: "Contact",
       cell: ({ row }: any) => (
         <div className="space-y-1">
@@ -97,6 +99,7 @@ const AddressBook = () => {
       ),
     },
     {
+      id: "location",
       header: "Location",
       cell: ({ row }: any) => (
         <div className="space-y-1">
@@ -110,14 +113,17 @@ const AddressBook = () => {
       ),
     },
     {
+      id: "address",
       header: "Address",
       accessorKey: "address",
     },
     {
+      id: "type",
       header: "Type",
       accessorKey: "type",
     },
     {
+      id: "actions",
       header: "Actions",
       cell: () => (
         <div className="flex gap-2">

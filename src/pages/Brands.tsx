@@ -76,6 +76,7 @@ const Brands = () => {
   // Define table columns
   const columns = [
     {
+      id: "logo",
       header: "Logo",
       cell: ({ row }: any) => (
         <div className="relative w-10 h-10 rounded-full overflow-hidden bg-muted flex items-center justify-center">
@@ -88,11 +89,13 @@ const Brands = () => {
       ),
     },
     {
+      id: "name",
       header: "Brand Name",
       accessorKey: "name",
       cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
     },
     {
+      id: "productsCount",
       header: "Products",
       accessorKey: "productsCount",
       cell: ({ row }: any) => (
@@ -103,6 +106,7 @@ const Brands = () => {
       ),
     },
     {
+      id: "status",
       header: "Status",
       accessorKey: "status",
       cell: (props: any) => (
@@ -112,6 +116,7 @@ const Brands = () => {
       ),
     },
     {
+      id: "featured",
       header: "Featured",
       accessorKey: "featured",
       cell: (props: any) => (
@@ -138,6 +143,7 @@ const Brands = () => {
       ),
     },
     {
+      id: "website",
       header: "Website",
       accessorKey: "website",
       cell: (props: any) => (
@@ -155,6 +161,7 @@ const Brands = () => {
       ),
     },
     {
+      id: "actions",
       header: "Actions",
       cell: () => (
         <div className="flex gap-2">

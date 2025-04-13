@@ -76,20 +76,24 @@ const ProductVariants = () => {
   // Define table columns
   const columns = [
     {
+      id: "product",
       header: "Product",
       accessorKey: "product",
       cell: (props: any) => <span className="font-medium">{props.getValue()}</span>,
     },
     {
+      id: "sku",
       header: "SKU",
       accessorKey: "sku",
       cell: (props: any) => <span className="font-mono text-xs">{props.getValue()}</span>,
     },
     {
+      id: "variant",
       header: "Variant",
       accessorKey: "variant",
     },
     {
+      id: "price",
       header: "Price",
       accessorKey: "price",
       cell: (props: any) => (
@@ -100,6 +104,7 @@ const ProductVariants = () => {
       ),
     },
     {
+      id: "stock",
       header: "Stock",
       accessorKey: "stock",
       cell: (props: any) => (
@@ -107,6 +112,7 @@ const ProductVariants = () => {
       ),
     },
     {
+      id: "status",
       header: "Status",
       accessorKey: "status",
       cell: (props: any) => {
@@ -129,6 +135,7 @@ const ProductVariants = () => {
       },
     },
     {
+      id: "actions",
       header: "Actions",
       cell: () => (
         <div className="flex gap-2">

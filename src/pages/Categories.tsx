@@ -94,6 +94,7 @@ const Categories = () => {
   // Define table columns
   const columns = [
     {
+      id: "name",
       header: "Name",
       accessorKey: "name",
       cell: ({ row }: any) => (
@@ -113,11 +114,13 @@ const Categories = () => {
       ),
     },
     {
+      id: "slug",
       header: "Slug",
       accessorKey: "slug",
       cell: (props: any) => <span className="font-mono text-xs">{props.getValue()}</span>,
     },
     {
+      id: "parent",
       header: "Parent",
       accessorKey: "parent",
       cell: (props: any) => (
@@ -127,11 +130,13 @@ const Categories = () => {
       ),
     },
     {
+      id: "productsCount",
       header: "Products",
       accessorKey: "productsCount",
       cell: (props: any) => <Badge variant="outline">{props.getValue()}</Badge>,
     },
     {
+      id: "status",
       header: "Status",
       accessorKey: "status",
       cell: (props: any) => (
@@ -141,6 +146,7 @@ const Categories = () => {
       ),
     },
     {
+      id: "featured",
       header: "Featured",
       accessorKey: "featured",
       cell: (props: any) => (
@@ -167,6 +173,7 @@ const Categories = () => {
       ),
     },
     {
+      id: "actions",
       header: "Actions",
       cell: () => (
         <div className="flex gap-2">
